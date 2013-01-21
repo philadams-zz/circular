@@ -1,0 +1,7 @@
+MANIFEST
+docs/
+tests/
+bin/
+requirements.txt
+setup.py
+CHANGES.txt

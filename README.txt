@@ -14,8 +14,7 @@ usage
 future
 ------
 
+- smarter image resizing (maintain aspect ratio and crop to fit)
+- fix overall license - MIT?
 - add --outfile option
-- fix license - MIT?
-- handle .jpg, .gif, etc.
-- portrait/landscape switch
-- align text right/left
+- add 'themes' for where/how text is displayed

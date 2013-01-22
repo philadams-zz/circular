@@ -13,13 +13,13 @@ from pprint import pprint
 
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import LETTER
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 
-margins = (38, 38, 38, 38)  # TRBL; 72 ppi
+margins = (28, 28, 28, 28)  # TRBL; 72 ppi
 
 
-def shrink(dim, margins=(38, 38, 38, 38)):
+def shrink(dim, margins=(28, 28, 28, 28)):
     """dim, an (x,y) tuple
     margins, a top-right-bottom-left tuple
     x` = x-(left+right); y` = y-(top+bottom)
@@ -77,6 +77,44 @@ def main():
     img = img.resize(map(int, img_new_dim))
 
     # TODO: draw text strings
+    # TODO: themes - right now we just have default positions/colors
+    draw = ImageDraw.Draw(img)
+
+    x, y = img.size
+    text_margin = 18
+    box = ((0, y*0.71), (x, y))
+    spacer = 0
+    draw.rectangle(box, fill='#222222')
+
+    # title
+    text_size = 72
+    font = ImageFont.truetype('src/Anonymous Pro.ttf', text_size)
+    text_opts = {'font': font,
+                 'fill': '#eeeeee'}
+    text_w, text_h = draw.textsize(config['title'], font=font)
+    text_pos = (x-text_w-text_margin, box[0][1]+text_margin/3+spacer)
+    draw.text(text_pos, config['title'], **text_opts)
+    spacer += text_h
+
+    # when
+    text_size = 36
+    font = ImageFont.truetype('src/Anonymous Pro.ttf', text_size)
+    text_opts = {'font': font,
+                 'fill': '#eeeeee'}
+    text_w, text_h = draw.textsize(config['when'], font=font)
+    text_pos = (x-text_w-text_margin, box[0][1]+text_margin/3+spacer)
+    draw.text(text_pos, config['when'], **text_opts)
+    spacer += text_h
+
+    # details
+    text_size = 36
+    font = ImageFont.truetype('src/Anonymous Pro.ttf', text_size)
+    text_opts = {'font': font,
+                 'fill': '#eeeeee'}
+    text_w, text_h = draw.textsize(config['details'], font=font)
+    text_pos = (x-text_w-text_margin, box[0][1]+text_margin/3+spacer)
+    draw.text(text_pos, config['details'], **text_opts)
+    spacer += text_h
 
     # filenames
     outdir, tmp = os.path.split(outfile)
@@ -89,7 +127,7 @@ def main():
     img.save(img_tmp)
     doc = canvas.Canvas(outfile,
                 pagesize=orientation(LETTER))
-    doc.drawImage(img_tmp, 38, 38)
+    doc.drawImage(img_tmp, margins[3], margins[2])
     doc.save()
 
 

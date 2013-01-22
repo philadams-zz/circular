@@ -10,3 +10,12 @@ usage
 -----
 
 `python -h` has details. But essentially edit `config.json` and then run `python circular.py <src/img.jpg>`; your generated circular will be at `./gen/circular.pdf`. An example output file is in the `examples` directory.
+
+future
+------
+
+- add --outfile option
+- fix license - MIT?
+- handle .jpg, .gif, etc.
+- portrait/landscape switch
+- align text right/left

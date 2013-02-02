@@ -1,4 +1,4 @@
-Circular (grf-tools)
+circular (grf-tools)
 ====================
 
 circular: a printed ad, directive, or notice intended for mass distribution.
